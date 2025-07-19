@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mongo1:
+    image: docker.io/library/mongo
+    container_name: mongo1
+    ports:
+      - 27017:27017
+    networks:
+      - mongo-cluster
+    command: ["mongod", "--replSet", "rs0"]
+
+  mongo2:
+    image: docker.io/library/mongo
+    container_name: mongo2
+    ports:
+      - 27018:27017
+    networks:
+      - mongo-cluster
+    command: ["mongod", "--replSet", "rs0"]
+
+  mongo3:
+    image: docker.io/library/mongo
+    container_name: mongo3
+    ports:
+      - 27019:27017
+    networks:
+      - mongo-cluster
+    command: ["mongod", "--replSet", "rs0"]
+
+networks:
+  mongo-cluster:
+    driver: bridge
